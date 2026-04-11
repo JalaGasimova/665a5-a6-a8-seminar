@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Data Analyst Portfolio</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #0b1220;
+    color: white;
+}
+
+/* HEADER */
+header {
+    background: linear-gradient(90deg, #1e3a8a, #0f172a);
+    padding: 60px 20px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 40px;
+    margin: 0;
+}
+
+header p {
+    color: #38bdf8;
+}
+
+/* STATS */
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 40px;
+}
+
+.card {
+    background: #1e293b;
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.card h2 {
+    color: #22c55e;
+    font-size: 30px;
+}
+
+/* ABOUT */
+.about {
+    padding: 40px;
+    text-align: center;
+    color: #cbd5e1;
+}
+
+/* PROJECTS */
+.projects {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 40px;
+}
+
+.project {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.project h3 {
+    color: #38bdf8;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #1e293b;
+    margin-top: 20px;
+}
+
+/* RESPONSIVE */
+@media(max-width: 768px) {
+    .stats, .projects {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <h1>📊 Data Analyst Portfolio</h1>
+    <p>Turning data into insights & business decisions</p>
+</header>
+
+<section class="stats">
+    <div class="card">
+        <h2>$250K</h2>
+        <p>Analyzed Revenue</p>
+    </div>
+
+    <div class="card">
+        <h2>18</h2>
+        <p>Dashboards Created</p>
+    </div>
+
+    <div class="card">
+        <h2>94%</h2>
+        <p>Prediction Accuracy</p>
+    </div>
+</section>
+
+<section class="about">
+    <h2>👩‍💻 About Me</h2>
+    <p>
+        Mən Data Analitikəm və məqsədim datadan dəyərli insight çıxarmaqdır. 
+        SQL, Python və Power BI ilə işləyirəm və biznes qərarlarını data ilə dəstəkləyirəm.
+    </p>
+</section>
+
+<section class="projects">
+
+    <div class="project">
+        <h3>📈 Sales Analysis</h3>
+        <p>Monthly satış analizləri aparıldı və 15% growth əldə edildi.</p>
+    </div>
+
+    <div class="project">
+        <h3>👥 Customer Segmentation</h3>
+        <p>K-means clustering ilə müştərilər qruplaşdırıldı.</p>
+    </div>
+
+    <div class="project">
+        <h3>📊 Dashboard Report</h3>
+        <p>Power BI dashboard hazırlanaraq KPI-lar izlənildi.</p>
+    </div>
+
+    <div class="project">
+        <h3>📉 Churn Analysis</h3>
+        <p>İstifadəçi itkilərinin səbəbləri analiz edildi.</p>
+    </div>
+
+</section>
+
+<footer>
+    CI/CD Project | Data Analyst Portfolio 🚀
+</footer>
+
+</body>
+</html>
