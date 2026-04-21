@@ -1,7 +1,9 @@
-name: Complete_CI_CD
+name: CI_CD_Pipeline
 
 on:
   push:
+    branches: [ main ]
+  pull_request:
     branches: [ main ]
 
 jobs:
@@ -12,28 +14,31 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # 2. Dependency Quraşdırma (HTML üçün linter yükləyirik)
-      - name: Install Dependencies
+      # 2. Dependency Quraşdırma
+      - name: Install Linter
         run: npm install htmlhint -g
 
-      # 3. Build və ya Validation (Kodun doğruluğu)
-      - name: HTML Validation
+      # 3. Build və ya Validation
+      - name: HTML Lint Check
         run: htmlhint *.html
 
-      # 4. Testlər (Məsələn, faylın daxilini yoxlayan real test)
-      - name: Run Tests
+      # 4. Testlər (Real yoxlanış)
+      - name: Run Content Tests
         run: |
-          grep -q "<title>" index.html || (echo "Title teqi tapılmadı!" && exit 1)
+          grep -q "<html>" index.html || (echo "Xəta: html teqi tapılmadı" && exit 1)
+          echo "Bütün testlər uğurla keçdi."
 
-      # 5. Artifact (Yoxlanılmış faylları yaddaşa veririk)
-      - name: Upload Artifact
+      # 5. Artifact (Yoxlanılmış faylları müvəqqəti yaddaşa verir)
+      - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: validated-html
-          path: ./*.html
+          name: production-files
+          path: .
 
   deploy:
-    needs: build-and-test # Test uğurlu olmasa, bura keçməyəcək
+    # Bu hissə yalnız "main" qoluna push olanda və testlər keçəndə işləyəcək
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build-and-test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
