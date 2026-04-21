@@ -1,0 +1,47 @@
+name: Complete_CI_CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Repository Checkout
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # 2. Dependency Quraşdırma (HTML üçün linter yükləyirik)
+      - name: Install Dependencies
+        run: npm install htmlhint -g
+
+      # 3. Build və ya Validation (Kodun doğruluğu)
+      - name: HTML Validation
+        run: htmlhint *.html
+
+      # 4. Testlər (Məsələn, faylın daxilini yoxlayan real test)
+      - name: Run Tests
+        run: |
+          grep -q "<title>" index.html || (echo "Title teqi tapılmadı!" && exit 1)
+
+      # 5. Artifact (Yoxlanılmış faylları yaddaşa veririk)
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: validated-html
+          path: ./*.html
+
+  deploy:
+    needs: build-and-test # Test uğurlu olmasa, bura keçməyəcək
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          npm install -g vercel
+          vercel --prod --token=$VERCEL_TOKEN --confirm
