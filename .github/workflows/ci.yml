@@ -8,4 +8,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: echo "HTML check passed"
+      - name: HTML Hint Check
+        run: |
+          npx htmlhint *.html
